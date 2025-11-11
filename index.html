@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlgoSprint | Data Structure Visual Lab</title>
+    <link rel="stylesheet" href="styles/global.css">
+</head>
+<body class="dashboard-body light-theme">
+    <header class="nav-bar" id="top">
+        <div class="nav-brand">
+            <span class="brand-mark">A</span>
+            <div class="brand-meta">
+                <span class="brand-title">AlgoSprint</span>
+                <span class="brand-subtitle">Data Structure Studio</span>
+            </div>
+        </div>
+        <nav class="nav-links" aria-label="Primary">
+            <a href="#modules">Modules</a>
+            <a href="#features">Highlights</a>
+            <a href="#contributors">Contributors</a>
+            <a href="#workflow">Workflow</a>
+        </nav>
+        <a class="btn btn--ghost" href="https://github.com/Shahpure15/DS-Project" target="_blank" rel="noopener">View on GitHub</a>
+    </header>
+
+    <main>
+        <section class="hero" id="home">
+            <div class="hero__content">
+                <span class="eyebrow">Collaborative Visual Playground</span>
+                <h1>AlgoSprint — a unified workspace to explore core data structures.</h1>
+                <p class="hero__lead">Jump between interactive visualisations for arrays, stacks, search algorithms, and circular linked lists — all tuned with a single design language and performance-first UI.</p>
+                <div class="hero__actions">
+                    <a class="btn btn--primary" href="#modules">Explore Modules</a>
+                    <a class="btn btn--ghost" href="#contributors">Meet the Team</a>
+                </div>
+                <div class="hero__meta">
+                    <span class="meta-chip">4 live sandboxes</span>
+                    <span class="meta-chip">Unified style tokens</span>
+                    <span class="meta-chip">100% front-end</span>
+                </div>
+            </div>
+            <div class="hero__visual" aria-hidden="true">
+                <div class="hero__graphic">
+                    <svg viewBox="0 0 540 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Data structure nodes illustration">
+                        <defs>
+                            <linearGradient id="heroCardGlow" x1="36" y1="28" x2="468" y2="196" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#bfdbfe" stop-opacity="0.65" />
+                                <stop offset="1" stop-color="#e0f2fe" stop-opacity="0.2" />
+                            </linearGradient>
+                            <linearGradient id="nodeStroke" x1="0" y1="0" x2="1" y2="1">
+                                <stop stop-color="#3b82f6" />
+                                <stop offset="1" stop-color="#06b6d4" />
+                            </linearGradient>
+                        </defs>
+                        <rect x="12" y="12" width="516" height="196" rx="28" fill="url(#heroCardGlow)" />
+                        <g stroke="url(#nodeStroke)" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.75">
+                            <path d="M130 90 C180 60, 240 60, 290 90" />
+                            <path d="M290 90 C340 120, 400 120, 450 90" />
+                            <path d="M130 130 C180 160, 240 160, 290 130" />
+                            <path d="M290 130 C340 100, 400 100, 450 130" />
+                            <path d="M170 58 L170 162" />
+                            <path d="M370 58 L370 162" />
+                        </g>
+                        <g fill="#1d4ed8" opacity="0.45">
+                            <circle cx="130" cy="90" r="18" />
+                            <circle cx="290" cy="90" r="18" />
+                            <circle cx="450" cy="90" r="18" />
+                            <circle cx="130" cy="130" r="18" />
+                            <circle cx="290" cy="130" r="18" />
+                            <circle cx="450" cy="130" r="18" />
+                        </g>
+                        <g>
+                            <circle cx="130" cy="90" r="14" fill="#60a5fa" />
+                            <circle cx="290" cy="90" r="14" fill="#38bdf8" />
+                            <circle cx="450" cy="90" r="14" fill="#22d3ee" />
+                            <circle cx="130" cy="130" r="14" fill="#a855f7" />
+                            <circle cx="290" cy="130" r="14" fill="#f97316" />
+                            <circle cx="450" cy="130" r="14" fill="#22c55e" />
+                        </g>
+                        <g fill="#0f172a" opacity="0.66">
+                            <rect x="192" y="38" width="72" height="26" rx="8" />
+                            <rect x="344" y="152" width="92" height="28" rx="10" />
+                            <rect x="84" y="152" width="88" height="28" rx="10" />
+                        </g>
+                        <g fill="#f8fafc" font-family="'Inter', sans-serif" font-size="12" text-anchor="middle">
+                            <text x="228" y="56">Queue</text>
+                            <text x="390" y="170">Graph</text>
+                            <text x="128" y="170">Array</text>
+                        </g>
+                    </svg>
+                </div>
+                <div class="hero-visual-grid">
+                    <div class="hero-card">
+                        <div class="hero-spark">⏱</div>
+                        <strong>Snappy interactions</strong>
+                        <p>Optimised rendering and state updates keep demos responsive even on mid-tier devices.</p>
+                    </div>
+                    <div class="hero-card">
+                        <div class="hero-spark">🎨</div>
+                        <strong>Design tokens</strong>
+                        <p>One palette, one typography scale, reusable components.</p>
+                    </div>
+                    <div class="hero-card">
+                        <div class="hero-spark">🧭</div>
+                        <strong>Guided journeys</strong>
+                        <p>Each module explains theory beside the visualization so learners stay oriented.</p>
+                    </div>
+                    <div class="hero-card">
+                        <div class="hero-spark">🔁</div>
+                        <strong>Seamless navigation</strong>
+                        <p>Quick links jump between modules without losing context.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="modules">
+            <div class="section__header">
+                <span class="eyebrow">Modules</span>
+                <h2>Visualise every core data structure in one place.</h2>
+                <p>AlgoSprint balances storytelling, controls, and animation so learners can reason about operations while they experiment.</p>
+            </div>
+            <div class="module-grid">
+                <a class="module-card" href="ashitosh-arrays/array.html">
+                    <span class="module-card__icon">AR</span>
+                    <div>
+                        <h3 class="module-card__title">Arrays Studio</h3>
+                        <p>Dive into insertion, deletion, and updates with clear index overlays and contextual hints.</p>
+                    </div>
+                    <div class="module-card__meta">
+                        <span>Array console</span>
+                        <span>Adaptive layout</span>
+                    </div>
+                    <span class="module-card__contributor">By Ashitosh Waghmare</span>
+                    <span class="module-card__cta">Open Visualiser <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M8.5 6h9v9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M17.5 6L6.5 17" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                </a>
+                <a class="module-card" href="Khushi-Searching/index.html">
+                    <span class="module-card__icon">SR</span>
+                    <div>
+                        <h3 class="module-card__title">Search Algorithms Lab</h3>
+                        <p>Compare linear, binary, sequential, and Fibonacci search with logging, stats, and speed tuning.</p>
+                    </div>
+                    <div class="module-card__meta">
+                        <span>Live complexity</span>
+                        <span>Adaptive arrays</span>
+                    </div>
+                    <span class="module-card__contributor">By Khushi Roongta</span>
+                    <span class="module-card__cta">Open Visualiser <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M8.5 6h9v9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M17.5 6L6.5 17" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                </a>
+                <a class="module-card" href="sahil-stack/index.html">
+                    <span class="module-card__icon">ST</span>
+                    <div>
+                        <h3 class="module-card__title">StackLab</h3>
+                        <p>Master stack operations, expression conversion, and Tower of Hanoi with voice-over assistance.</p>
+                    </div>
+                    <div class="module-card__meta">
+                        <span>Multi-panel UI</span>
+                        <span>Dark/light toggle</span>
+                    </div>
+                    <span class="module-card__contributor">By Sahil Tadavi</span>
+                    <span class="module-card__cta">Open Visualiser <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M8.5 6h9v9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M17.5 6L6.5 17" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                </a>
+                <a class="module-card" href="umesh-cll/circular-linked-list.html">
+                    <span class="module-card__icon">CL</span>
+                    <div>
+                        <h3 class="module-card__title">Circular Linked List Hub</h3>
+                        <p>Traverse theory to advanced operations with SVG-driven diagrams and a command console.</p>
+                    </div>
+                    <div class="module-card__meta">
+                        <span>Playground toolkit</span>
+                        <span>Step logging</span>
+                    </div>
+                    <span class="module-card__contributor">By Umesh Kuyate</span>
+                    <span class="module-card__cta">Open Visualiser <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M8.5 6h9v9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M17.5 6L6.5 17" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                </a>
+            </div>
+        </section>
+
+        <section class="section" id="features">
+            <div class="section__header">
+                <span class="eyebrow">Highlights</span>
+                <h2>Sleek, consistent, and performance-tuned.</h2>
+                <p>The design system keeps typography, spacing, and color decisions centralised, so every micro-app feels part of the same product.</p>
+            </div>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <span class="feature-tag">Design System</span>
+                    <strong>Unified tokens & components</strong>
+                    <p>Global variables drive color, typography, and shadows. Modules inherit shared panels, buttons, and chips for instant cohesion.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-tag">Micro-frontend</span>
+                    <strong>Independent yet consistent</strong>
+                    <p>Each visualization manages its own scripts while leaning on shared layout primitives. Navigation remains seamless.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-tag">Accessibility</span>
+                    <strong>Readable and keyboard friendly</strong>
+                    <p>Semantic markup, focus outlines, and high-contrast colors support inclusive learning sessions.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="contributors">
+            <div class="section__header">
+                <span class="eyebrow">Contributors</span>
+                <h2>The team behind AlgoSprint.</h2>
+                <p>Students teamed up to tackle different data structures, aligning on a shared design language and engineering checklist.</p>
+            </div>
+            <div class="contributor-grid">
+                <article class="contributor-card">
+                    <div class="avatar-ring">AP</div>
+                    <h3>Ashitosh Waghmare</h3>
+                    <span>Array console architect • Interaction design</span>
+                    <div class="tech-stack">
+                        <span class="tech-pill">Arrays</span>
+                        <span class="tech-pill">DOM API</span>
+                        <span class="tech-pill">UX copy</span>
+                    </div>
+                </article>
+                <article class="contributor-card">
+                    <div class="avatar-ring">KS</div>
+                    <h3>Khushi Roongta</h3>
+                    <span>Search visualizations • Animation pipeline</span>
+                    <div class="tech-stack">
+                        <span class="tech-pill">Binary search</span>
+                        <span class="tech-pill">State machines</span>
+                        <span class="tech-pill">UI polish</span>
+                    </div>
+                </article>
+                <article class="contributor-card">
+                    <div class="avatar-ring">SM</div>
+                    <h3>Sahil Tadavi</h3>
+                    <span>StackLab lead • Voice + accessibility</span>
+                    <div class="tech-stack">
+                        <span class="tech-pill">Stacks</span>
+                        <span class="tech-pill">Visualization</span>
+                        <span class="tech-pill">Speech API</span>
+                    </div>
+                </article>
+                <article class="contributor-card">
+                    <div class="avatar-ring">US</div>
+                    <h3>Umesh Kuyate</h3>
+                    <span>Circular linked lists • SVG systems</span>
+                    <div class="tech-stack">
+                        <span class="tech-pill">Linked lists</span>
+                        <span class="tech-pill">SVG</span>
+                        <span class="tech-pill">Dark mode</span>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="section" id="workflow">
+            <div class="section__header">
+                <span class="eyebrow">Workflow</span>
+                <h2>How to extend AlgoSprint.</h2>
+                <p>Follow this lightweight pipeline to plug in new data structures without breaking the shared experience.</p>
+            </div>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <strong>1. Prototype the story</strong>
+                    <p>Sketch out the learner flow, key operations, and necessary controls. Keep components aligned with the existing hero, panels, and card patterns.</p>
+                </div>
+                <div class="feature-card">
+                    <strong>2. Plug into design tokens</strong>
+                    <p>Import <code>styles/global.css</code>, reuse panel and button classes, and extend with module-specific CSS only where needed.</p>
+                </div>
+                <div class="feature-card">
+                    <strong>3. Validate performance & access</strong>
+                    <p>Test transitions, keyboard focus, and responsiveness. Ship only when the module feels as smooth as the rest of AlgoSprint.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-meta">
+            <div>
+                <div class="brand-meta">
+                    <span class="brand-title">AlgoSprint</span>
+                    <span class="brand-subtitle">Data Structure Studio</span>
+                </div>
+                <p>Crafted by the AlgoSprint cohort — unifying algorithms, visuals, and storytelling.</p>
+            </div>
+            <div class="footer-links">
+                <a href="#top">Back to top</a>
+                <a href="README.md">Project brief</a>
+                <a href="https://github.com/Shahpure15/DS-Project" target="_blank" rel="noopener">Repository</a>
+            </div>
+        </div>
+        <p style="margin:0; color: var(--text-muted);">&copy; 2025 AlgoSprint Team. All rights reserved.</p>
+    </footer>
+
+    <!-- Theme Toggle Button -->
+    <button class="theme-toggle-btn" data-theme-toggle aria-label="Toggle theme">🌙</button>
+
+    <!-- Theme Manager Script -->
+    <script src="styles/theme-manager.js"></script>
+</body>
+</html>

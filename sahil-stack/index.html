@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>StackLab — Interactive Stack & Recursion</title>
+
+  <link rel="stylesheet" href="../styles/global.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="module-body module-body--stack light-theme">
+  <div class="module-shell stack-shell">
+    <a class="back-link" href="../index.html">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Back to dashboard
+    </a>
+    <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <h1>Stack<span class="accent">L</span></h1>
+        <small></small>
+      </div>
+
+      <nav class="nav" role="navigation" aria-label="Main navigation">
+        <button data-section="overview" class="nav-btn active">Overview</button>
+        <button data-section="stack" class="nav-btn">Stack Ops</button>
+        <button data-section="expressions" class="nav-btn">Expressions</button>
+        <button data-section="recursion" class="nav-btn">Recursion</button>
+        <button data-section="hanoi" class="nav-btn">Hanoi</button>
+      </nav>
+
+      <div class="controls">
+        <label>Voice Assistant</label>
+        <div class="voice-row">
+          <input id="voiceToggle" type="checkbox" checked aria-label="Enable voice assistant"/>
+          <span class="small">Male Friendly</span>
+        </div>
+
+        <label>Voice rate</label>
+        <input id="voiceRate" type="range" min="0.7" max="1.4" step="0.1" value="1" />
+
+        <label>Theme</label>
+        <button id="changeTheme" class="ghost">Switch theme</button>
+      </div>
+
+      <footer class="sidebar-footer">
+        <small>© </small>
+      </footer>
+    </aside>
+
+    <main class="main" role="main">
+      <header class="main-header">
+        <div>
+          <h2 id="pageTitle">Overview</h2>
+          <p class="subtitle">Learn Stacks, conversions and recursion — with clear steps, voice and visuals.</p>
+        </div>
+      </header>
+
+      <section class="content">
+        <!-- OVERVIEW -->
+        <article id="overview" class="page active">
+          <h3>Introduction — What is a Stack?</h3>
+          <div class="card split">
+            <div class="text">
+              <p><strong>Stack</strong> is a linear data structure following <em>LIFO</em> (Last In — First Out).</p>
+              <ul>
+                <li>Ops: push(x), pop(), peek(), isEmpty()</li>
+                <li>Impl: arrays (static/resizable), linked lists (dynamic)</li>
+                <li>Apps: recursion calls, expression evaluation, undo/redo</li>
+              </ul>
+            </div>
+
+            <div class="code-window" aria-hidden="false">
+              <div class="code-title">C++ — array stack</div>
+              <pre><code class="cpp">
+#include &lt;iostream&gt;
+using namespace std;
+#define SIZE 5
+int st[SIZE], top = -1;
+void push(int x){ if(top==SIZE-1) cout<<"Overflow\n"; else st[++top]=x; }
+void pop(){ if(top==-1) cout<<"Underflow\n"; else top--; }
+              </code></pre>
+            </div>
+          </div>
+        </article>
+
+        <!-- STACK OPS -->
+        <article id="stack" class="page">
+          <h3>Stack — Push & Pop</h3>
+          <div class="card">
+            <div class="stack-area">
+              <div id="stackViz" class="stack-viz" aria-live="polite" aria-label="Stack visualization"></div>
+
+              <div class="stack-info">
+                <label for="pushValue" class="small">Value</label>
+                <input id="pushValue" placeholder="e.g. 42 or A" />
+                <div class="row">
+                  <button id="btnPush" class="primary">Push</button>
+                  <button id="btnPop" class="danger">Pop</button>
+                  <button id="btnClearStack" class="ghost">Clear</button>
+                </div>
+                <div class="muted" id="stackStatus">Size: 0</div>
+              </div>
+            </div>
+
+            <div class="explain">
+              <h4>How it works</h4>
+              <p>Push slides a new block into the top, pop removes it with a small lift-and-fade. The assistant explains each action aloud if enabled.</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- EXPRESSIONS -->
+        <article id="expressions" class="page">
+          <h3>Expression Conversion — Animated</h3>
+          <div class="card stacked">
+            <div class="controls-row">
+              <input id="exprInput" placeholder="Enter expression (A+B*(C-D))" />
+              <select id="exprMode">
+                <option value="infixToPostfix">Infix → Postfix</option>
+                <option value="infixToPrefix">Infix → Prefix</option>
+                <option value="postfixToInfix">Postfix → Infix</option>
+                <option value="prefixToInfix">Prefix → Infix</option>
+              </select>
+              <button id="exprConvert" class="primary">Animate Convert</button>
+              <button id="exprReset" class="ghost">Reset</button>
+            </div>
+
+            <div class="expr-viz" aria-live="polite">
+              <div class="panel">
+                <div class="panel-title">Stack (visual)</div>
+                <div id="exprStack" class="expr-stack" aria-hidden="false"></div>
+              </div>
+
+              <div class="panel">
+                <div class="panel-title">Output</div>
+                <div id="exprOutput" class="expr-output" aria-hidden="false"></div>
+              </div>
+
+              <div class="panel steps">
+                <div class="panel-title">Steps (spoken)</div>
+                <div id="exprSteps" class="expr-steps" aria-live="polite"></div>
+              </div>
+            </div>
+            <div class="note">
+              <small>Use letters (A-Z) or digits; keep tokens single-character for the animated demo.</small>
+            </div>
+          </div>
+        </article>
+
+        <!-- RECURSION -->
+        <article id="recursion" class="page">
+          <h3>Recursion — Concept & Example</h3>
+          <div class="card split">
+            <div class="text">
+              <h4>Recursion</h4>
+              <p>Recursion solves a problem by calling the same function for smaller subproblems (direct, indirect, tail recursion).</p>
+              <h4>Tower of Hanoi</h4>
+              <p>Move n disks from source to target using an auxiliary peg with recursive steps.</p>
+            </div>
+
+            <div class="code-window">
+              <div class="code-title">C++ — Tower of Hanoi</div>
+              <pre><code class="cpp">
+#include &lt;iostream&gt;
+using namespace std;
+void towerOfHanoi(int n,char from,char to,char aux){
+  if(n==1){ cout<<"Move disk 1 from "<<from<<" to "<<to<<endl; return; }
+  towerOfHanoi(n-1,from,aux,to);
+  cout<<"Move disk "<<n<<" from "<<from<<" to "<<to<<endl;
+  towerOfHanoi(n-1,aux,to,from);
+}
+              </code></pre>
+            </div>
+          </div>
+        </article>
+
+        <!-- HANOI -->
+        <article id="hanoi" class="page">
+          <h3>Tower of Hanoi — Animated</h3>
+          <div class="card">
+            <div class="hanoi-controls">
+              <label for="hanoiCount">Disks (2–6)</label>
+              <input id="hanoiCount" type="number" min="2" max="6" value="3" />
+              <div class="row">
+                <button id="start-hanoi" class="primary">Start Tower of Hanoi</button>
+                <button id="stop-hanoi" class="ghost">Stop</button>
+                <button id="clear-hanoi" class="danger">Clear</button>
+              </div>
+            </div>
+
+            <div id="hanoi-container" class="hanoi-board" aria-live="polite">
+              <div id="pegA" class="peg"><div class="peg-label">A</div></div>
+              <div id="pegB" class="peg"><div class="peg-label">B</div></div>
+              <div id="pegC" class="peg"><div class="peg-label">C</div></div>
+            </div>
+
+            <div id="hanoiLog" class="expr-steps" style="margin-top:12px;"></div>
+          </div>
+        </article>
+      </section>
+    </main>
+  </div>
+
+      </div>
+
+  <script src="script.js"></script>
+  <script src="hanoi.js"></script>
+
+  <!-- Theme Toggle Button -->
+  <button class="theme-toggle-btn" data-theme-toggle aria-label="Toggle theme">🌙</button>
+
+  <!-- Theme Manager Script -->
+  <script src="../styles/theme-manager.js"></script>
+</body>
+</html>

@@ -7,187 +7,18 @@
   <title>Circular Linked List - Complete Guide & Visualization</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="../styles/global.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --color-primary: #2563eb;
-      --color-primary-600: #1d4ed8;
-      --color-secondary: #7c3aed;
-      --color-accent: #10b981;
-      --color-warn: #f59e0b;
-      --color-danger: #ef4444;
-      --bg: #f8fafc;
-      --bg-elev: #ffffff;
-      --text: #0f172a;
-      --muted: #475569;
-      --border: #e2e8f0;
-      --shadow: 0 8px 24px rgba(15,23,42,0.08);
-      --radius: 12px;
-      --radius-sm: 10px;
-      --radius-lg: 16px;
-      --focus: 0 0 0 3px rgba(37, 99, 235, 0.35);
-      --code-bg: #0b1220;
-      --code-fg: #e5e7eb;
-      --green: #10b981;
-      --yellow: #f59e0b;
-      --blue: #2563eb;
-      --red: #ef4444;
-      --purple: #7c3aed;
-    }
-    [data-theme="dark"] {
-      --bg: #0b1220;
-      --bg-elev: #0f172a;
-      --text: #e5e7eb;
-      --muted: #94a3b8;
-      --border: #1f2937;
-      --shadow: 0 12px 28px rgba(0,0,0,0.45);
-      --code-bg: #0b1220;
-      --code-fg: #f8fafc;
-    }
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      color: var(--text);
-      background: var(--bg);
-      line-height: 1.55;
-    }
-    a { color: inherit; text-decoration: none; }
-    img { max-width: 100%; display: block; }
-
-    /* Header / Nav */
-    header.site-header {
-      position: sticky; top: 0; z-index: 50;
-      backdrop-filter: blur(10px);
-      background: color-mix(in srgb, var(--bg-elev) 84%, transparent);
-      border-bottom: 1px solid var(--border);
-    }
-    .nav {
-      max-width: 1280px; margin: 0 auto; padding: 10px 60px 10px 60px; display: flex; align-items: center; gap: 16px; position: relative;
-    }
-    .brand { font-weight: 800; letter-spacing: -0.02em; display: flex; align-items: center; gap: 10px; }
-    .brand .dot { width: 10px; height: 10px; border-radius: 50%; background: linear-gradient(135deg, var(--color-primary), var(--color-secondary)); box-shadow: 0 0 0 3px rgba(37,99,235,0.15); }
-    .brand span { font-size: 16px; }
-  /* Force a single horizontal row for nav items; allow horizontal scrolling on small screens */
-  nav.menu { display: flex; flex-wrap: nowrap; gap: 10px; margin-left: auto; overflow-x: auto; -webkit-overflow-scrolling: touch; }
-  nav.menu a { padding: 8px 12px; border-radius: 8px; color: var(--muted); font-weight: 600; white-space: nowrap; }
-  nav.menu::-webkit-scrollbar { height: 8px; }
-  nav.menu::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.06); border-radius: 999px; }
-    nav.menu a:hover, nav.menu a:focus { color: var(--text); background: var(--border); outline: none; box-shadow: var(--focus); }
-    /* Small circular theme toggle placed at top-left of the header */
-    .theme-toggle { 
-      border: 1px solid var(--border); 
-      background: var(--bg-elev); 
-      color: var(--muted); 
-      padding: 8px; 
-      border-radius: 999px; 
-      cursor: pointer; 
-      font-weight: 600; 
-      width: 44px; 
-      height: 44px; 
-      display: inline-flex; 
-      align-items: center; 
-      justify-content: center; 
-      position: absolute; 
-      left: 12px; 
-      top: 50%; 
-      transform: translateY(-50%);
-      font-size: 20px;
-    }
-    .theme-toggle:hover { color: var(--text); border-color: var(--muted); transform: translateY(-50%) scale(1.05); }
-
-    /* Hero */
-    .hero { max-width: 1280px; margin: 24px auto; padding: 24px 16px; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 24px; align-items: center; }
-    .hero h1 { font-size: clamp(24px, 4vw, 42px); line-height: 1.1; margin: 0 0 8px; }
-    .hero p.lead { color: var(--muted); font-size: 18px; margin: 0 0 16px; }
-    .cta { display: inline-flex; align-items: center; gap: 10px; background: linear-gradient(135deg, var(--color-primary), var(--color-secondary)); color: white; padding: 12px 18px; border-radius: 12px; font-weight: 700; box-shadow: var(--shadow); }
-    .cta:hover { filter: brightness(1.05); transform: translateY(-1px); }
-    .hero-card { background: var(--bg-elev); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; box-shadow: var(--shadow); position: relative; }
-
-    /* Sections */
-    section { max-width: 1280px; margin: 32px auto; padding: 0 16px; }
-    section h2 { font-size: clamp(20px, 3vw, 30px); margin: 6px 0 12px; }
-    .sub { color: var(--muted); margin: 0 0 8px; font-weight: 600; }
-
-    /* Visualization Playground Layout */
-    .playground {
-      display: grid; grid-template-columns: 320px 1fr; gap: 16px; align-items: start;
-    }
-    .panel { background: var(--bg-elev); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); }
-    .panel .panel-header { padding: 12px 14px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
-    .panel .panel-body { padding: 12px 14px; }
-  /* Make control sidebar scroll independently to avoid page scroll chaining */
-  #controlsPanel .panel-body { max-height: calc(100vh - 140px); overflow: auto; overscroll-behavior: contain; }
-
-    .controls { display: grid; gap: 12px; }
-    .control-group { border: 1px dashed var(--border); border-radius: var(--radius-sm); padding: 10px; }
-    .control-group h3 { margin: 0 0 8px; font-size: 14px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
-    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-    .row-1 { display: grid; grid-template-columns: 1fr; gap: 8px; }
-    label { font-size: 13px; color: var(--muted); }
-    input, select, button, textarea { width: 100%; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--border); background: var(--bg-elev); color: var(--text); }
-    button { cursor: pointer; font-weight: 700; }
-    button.primary { background: var(--color-primary); border-color: var(--color-primary); color: white; }
-    button.secondary { background: var(--color-secondary); border-color: var(--color-secondary); color: white; }
-    button.ghost { background: transparent; }
-    button.warn { background: var(--color-warn); border-color: var(--color-warn); color: #111827; }
-    button.danger { background: var(--danger); border-color: var(--danger); color: white; }
-    button:focus { outline: none; box-shadow: var(--focus); }
-
-    .viz-wrapper { min-height: 420px; display: grid; grid-template-rows: 1fr auto; gap: 10px; }
-    .svg-stage { background: conic-gradient(from 90deg at 50% 50%, rgba(37, 99, 235, 0.05), transparent 40%); border: 1px solid var(--border); border-radius: var(--radius); position: relative; overflow: hidden; }
-    svg { width: 100%; height: 100%; display: block; }
-
-    .legend { display: flex; gap: 10px; flex-wrap: wrap; font-size: 13px; color: var(--muted); }
-    .legend .item { display: inline-flex; align-items: center; gap: 6px; padding: 6px 8px; border: 1px solid var(--border); border-radius: 999px; background: var(--bg-elev); }
-    .dot { width: 10px; height: 10px; border-radius: 50%; }
-
-    /* Console */
-    .console { background: var(--bg-elev); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); }
-    .console .panel-header { position: sticky; top: 50px; background: var(--bg-elev); z-index: 2; }
-    .log { max-height: 220px; overflow: auto; font-family: "Fira Code", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; background: var(--code-bg); color: var(--code-fg); padding: 10px; border-bottom-left-radius: var(--radius); border-bottom-right-radius: var(--radius); }
-    .log .line { padding: 4px 0; border-bottom: 1px dashed rgba(255,255,255,0.06); }
-    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; padding: 8px 10px; color: var(--muted); font-size: 13px; }
-
-    /* Accordions */
-    details { border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--bg-elev); padding: 10px; }
-    details + details { margin-top: 10px; }
-    details[open] { box-shadow: var(--shadow); }
-    summary { cursor: pointer; font-weight: 700; }
-
-    /* Tables */
-    table { width: 100%; border-collapse: collapse; }
-    th, td { border-bottom: 1px solid var(--border); padding: 10px; text-align: left; }
-    th { position: sticky; top: 0; background: var(--bg-elev); z-index: 1; cursor: pointer; }
-    .chip { display: inline-flex; align-items: center; gap: 6px; padding: 4px 8px; border-radius: 999px; font-size: 12px; font-weight: 700; }
-    .chip.green { background: #dcfce7; color: #14532d; }
-    .chip.yellow { background: #fef9c3; color: #713f12; }
-    .chip.red { background: #fee2e2; color: #7f1d1d; }
-
-    /* Floating / utility */
-    .back-to-top { position: fixed; right: 16px; bottom: 16px; padding: 10px 12px; border-radius: 999px; border: 1px solid var(--border); background: var(--bg-elev); box-shadow: var(--shadow); }
-    .progress { position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(90deg, var(--color-primary), var(--color-secondary)); width: 0%; z-index: 60; }
-
-    /* Animations */
-    .fade-in { animation: fadeIn .6s ease both; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
-    .pulse { animation: pulse 1s ease-in-out 1; }
-    @keyframes pulse { 0% { transform: scale(0.8); } 50% { transform: scale(1.08); } 100% { transform: scale(1); } }
-
-    /* Responsive */
-    @media (max-width: 980px) {
-      .hero { grid-template-columns: 1fr; }
-      .playground { grid-template-columns: 1fr; }
-      .stats { grid-template-columns: repeat(2, 1fr); }
-    }
-  </style>
+  <link rel="stylesheet" href="circular.css">
 </head>
-<body>
+<body class="module-body module-body--cll light-theme">
   <div class="progress" id="scrollProgress" aria-hidden="true"></div>
   <header class="site-header" role="banner" aria-label="Site header">
     <div class="nav">
-      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌗</button>
+      <a class="back-link cll-back-link" href="../index.html">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Back to dashboard
+      </a>
       <div class="brand" aria-label="Brand">
         <span class="dot" aria-hidden="true"></span>
         <span>Circular Linked List - Complete Guide & Visualization</span>
@@ -660,19 +491,7 @@ struct NodeDoubly {
 
     const Theme = {
       init() {
-        const key = 'cll-theme';
-        const saved = localStorage.getItem(key);
-        if (saved) {
-          document.documentElement.setAttribute('data-theme', saved);
-        } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-          document.documentElement.setAttribute('data-theme', 'dark');
-        }
-        $('#themeToggle').addEventListener('click', () => {
-          const cur = document.documentElement.getAttribute('data-theme');
-          const next = cur === 'dark' ? 'light' : 'dark';
-          document.documentElement.setAttribute('data-theme', next);
-          localStorage.setItem(key, next);
-        });
+        // Theme is now managed by global theme-manager.js
       }
     };
 
@@ -1425,5 +1244,11 @@ void splitIntoHalves(NodeSingly* head, NodeSingly*& head1, NodeSingly*& tail1,
     // Initial draw
     refresh();
   </script>
+
+  <!-- Theme Toggle Button -->
+  <button class="theme-toggle-btn" data-theme-toggle aria-label="Toggle theme">🌙</button>
+
+  <!-- Theme Manager Script -->
+  <script src="../styles/theme-manager.js"></script>
 </body>
 </html>

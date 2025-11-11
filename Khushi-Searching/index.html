@@ -3,21 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search Algorithms Visualization</title>
+    <title>AlgoSprint · Search Algorithms Lab</title>
+    <link rel="stylesheet" href="../styles/global.css">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body>
-    <div class="floating-elements" id="floating-elements"></div>
-    
-    <div class="container">
-        <header>
-            <h1><i class="fas fa-search"></i> Search Algorithms Visualization</h1>
-            <p class="subtitle">Explore how different search algorithms work with real-time visualization and complexity analysis</p>
+<body class="module-body module-body--search light-theme">
+    <div class="floating-elements" id="floating-elements" aria-hidden="true"></div>
+
+    <div class="module-shell search-shell">
+        <a class="back-link" href="../index.html">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Back to dashboard
+        </a>
+
+        <header class="module-header search-header">
+            <span class="eyebrow">Module</span>
+            <h1><i class="fas fa-search"></i> Search Algorithms Lab</h1>
+            <p class="subtitle">Step through linear, binary, Fibonacci, and sequential search with instrumentation, metrics, and responsive visuals.</p>
         </header>
 
         <div class="dashboard">
-            <div class="console">
+            <div class="panel console">
                 <h2 class="section-title"><i class="fas fa-sliders-h"></i> Control Panel</h2>
                 
                 <div class="input-group">
@@ -64,7 +71,7 @@
                 </div>
             </div>
             
-            <div class="visualization">
+            <div class="panel visualization">
                 <h2 class="section-title"><i class="fas fa-eye"></i> Visualization</h2>
                 <div class="array-container" id="array-container">
                     <!-- Array elements will be generated here -->
@@ -128,5 +135,11 @@
     </div>
 
     <script src="script.js"></script>
+
+    <!-- Theme Toggle Button -->
+    <button class="theme-toggle-btn" data-theme-toggle aria-label="Toggle theme">🌙</button>
+
+    <!-- Theme Manager Script -->
+    <script src="../styles/theme-manager.js"></script>
 </body>
 </html>

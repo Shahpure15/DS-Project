@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doubly Linked List Visualizer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Doubly Linked List Visualizer</h1>
+        <p>Learn everything about Doubly Linked Lists with interactive animations!</p>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav id="tabs">
+        <button class="tab-btn active" onclick="showTab('overview')">Overview</button>
+        <button class="tab-btn" onclick="showTab('structure')">Structure</button>
+        <button class="tab-btn" onclick="showTab('operations')">Operations</button>
+        <button class="tab-btn" onclick="showTab('applications')">Applications</button>
+        <button class="tab-btn" onclick="showTab('visualizer')">Visualizer</button>
+    </nav>
+
+    <!-- Tab Contents -->
+
+    <!-- Overview -->
+    <section id="overview" class="tab-content active">
+    <div class="card">
+        <h2>What is a Doubly Linked List?</h2>
+        <p>A <strong>Doubly Linked List (DLL)</strong> is a linear data structure where each node contains:</p>
+        <ul>
+            <li>A <strong>data</strong> field storing the value.</li>
+            <li>A <strong>prev</strong> pointer pointing to the previous node.</li>
+            <li>A <strong>next</strong> pointer pointing to the next node.</li>
+        </ul>
+
+        <h3>Key Features:</h3>
+        <ul>
+            <li>Each node is connected to its previous and next node, allowing <strong>bidirectional traversal</strong>.</li>
+            <li>The <strong>head</strong> points to the first node, the <strong>tail</strong> points to the last node.</li>
+            <li>Efficient insertion and deletion at both ends.</li>
+            <li>Requires extra memory for the prev pointer compared to singly linked lists.</li>
+        </ul>
+
+        <h3>Types of Linked Lists:</h3>
+        <ul>
+            <li><strong>Singly Linked List:</strong> Only next pointers, unidirectional.</li>
+            <li><strong>Doubly Linked List:</strong> Both prev and next pointers, bidirectional.</li>
+            <li><strong>Circular Doubly Linked List:</strong> Last node points back to head, forming a loop.</li>
+        </ul>
+
+        <h3>Advantages of DLL:</h3>
+        <ul>
+            <li>Can traverse in both directions.</li>
+            <li>Easier to insert or delete nodes at the end or middle compared to singly linked list.</li>
+            <li>Useful for implementing advanced data structures like deque, LRU cache, and undo/redo functionality.</li>
+        </ul>
+
+        <h3>Disadvantages of DLL:</h3>
+        <ul>
+            <li>Uses more memory per node (extra prev pointer).</li>
+            <li>Complex implementation compared to singly linked list.</li>
+            <li>Care must be taken to update both prev and next pointers during insertion/deletion.</li>
+        </ul>
+
+        <h3>Memory Representation:</h3>
+        <pre>
+NULL <- [Prev|Data|Next] <-> [Prev|Data|Next] <-> [Prev|Data|Next] -> NULL
+        </pre>
+
+        <h3>Traversal Examples:</h3>
+        <p><strong>Forward:</strong> Head → Node1 → Node2 → Tail</p>
+        <p><strong>Backward:</strong> Tail ← Node2 ← Node1 ← Head</p>
+
+        <h3>Real-life Analogy:</h3>
+        <ul>
+            <li>Imagine a train with coaches: each coach is connected to the previous and next coach. You can move forward or backward between coaches easily.</li>
+            <li>Text editors use DLL for undo/redo operations (moving forward/backward through editing states).</li>
+        </ul>
+
+        <button class="more-info-btn" onclick="toggleMoreInfo(this)">More Details</button>
+        <div class="more-info">
+            <h3>Additional Notes:</h3>
+            <ul>
+                <li>DLL can be circular or non-circular.</li>
+                <li>In a circular DLL, the tail node points to the head, enabling continuous traversal.</li>
+                <li>Insertion at any position requires updating the adjacent nodes' prev and next pointers.</li>
+                <li>Deletion requires re-linking the previous and next nodes of the deleted node.</li>
+                <li>Time complexity for basic operations:</li>
+                <ul>
+                    <li>Insertion/Deletion at ends: O(1)</li>
+                    <li>Insertion/Deletion at middle: O(n)</li>
+                    <li>Traversal: O(n)</li>
+                </ul>
+            </ul>
+        </div>
+    </div>
+</section>
+
+
+    <!-- Structure -->
+    <section id="structure" class="tab-content">
+    <div class="card">
+        <h2>Structure of a Doubly Linked List Node</h2>
+        <p>Each node in a doubly linked list has three main components:</p>
+        <ul>
+            <li><strong>Data:</strong> Stores the value or information.</li>
+            <li><strong>Prev Pointer:</strong> Points to the previous node. For the head node, this is <em>NULL</em>.</li>
+            <li><strong>Next Pointer:</strong> Points to the next node. For the tail node, this is <em>NULL</em>.</li>
+        </ul>
+        <p>Special pointers:</p>
+        <ul>
+            <li><strong>Head:</strong> Points to the first node in the list.</li>
+            <li><strong>Tail:</strong> Points to the last node in the list.</li>
+        </ul>
+        <p>Memory diagram example:</p>
+        <pre style="font-size: 17px">
+NULL <- [Prev|10|Next] <-> [Prev|20|Next] <-> [Prev|30|Next] -> NULL
+        </pre>
+        <p>Key Points:</p>
+        <ul>
+            <li>Each node uses extra memory for the prev pointer compared to singly linked lists.</li>
+            <li>Bidirectional traversal is possible.</li>
+            <li>Insertion and deletion can be more efficient than singly linked lists in some cases.</li>
+            <li>Head.prev is always NULL, Tail.next is always NULL.</li>
+        </ul>
+        <button class="more-info-btn" onclick="toggleMoreInfo(this)">More Details</button>
+        <div class="more-info">
+            <p>Node connections are often visualized with arrows: <strong>Prev ← Node → Next</strong>.</p>
+            <p>DLL can be implemented in memory as contiguous (array-based) or linked nodes (pointer-based).</p>
+        </div>
+    </div>
+</section>
+
+
+    <!-- Operations -->
+    <section id="operations" class="tab-content">
+    <div class="card">
+        <h2>Operations on Doubly Linked List</h2>
+
+        <h3>Insertion</h3>
+        <ul>
+            <li><strong>Add at Front:</strong> New node becomes the head. Update head pointer and next/prev links.</li>
+            <li><strong>Add at End:</strong> New node becomes the tail. Update tail pointer and prev/next links.</li>
+            <li><strong>Add at Middle/Position:</strong> Traverse to the position, insert node, update adjacent prev/next links.</li>
+        </ul>
+
+        <h3>Deletion</h3>
+        <ul>
+            <li><strong>Pop Front:</strong> Remove the head node and update head pointer. Head.prev becomes NULL.</li>
+            <li><strong>Pop End:</strong> Remove the tail node and update tail pointer. Tail.next becomes NULL.</li>
+            <li><strong>Pop Middle:</strong> Traverse to position, remove node, link adjacent nodes together.</li>
+        </ul>
+
+        <h3>Traversal</h3>
+        <ul>
+            <li><strong>Forward Traversal:</strong> Start from head, move through next pointers until tail.</li>
+            <li><strong>Backward Traversal:</strong> Start from tail, move through prev pointers until head.</li>
+        </ul>
+
+        <h3>Time Complexity</h3>
+        <ul>
+            <li>Insertion at front or end: <strong>O(1)</strong></li>
+            <li>Insertion at middle/position: <strong>O(n)</strong></li>
+            <li>Deletion at front or end: <strong>O(1)</strong></li>
+            <li>Deletion at middle/position: <strong>O(n)</strong></li>
+            <li>Traversal: <strong>O(n)</strong></li>
+        </ul>
+
+        <h3>Notes:</h3>
+        <ul>
+            <li>Unlike singly linked lists, you can traverse backward efficiently.</li>
+            <li>Pointers must always be updated carefully to avoid breaking the list.</li>
+            <li>Visual animations help to see which links are being updated.</li>
+        </ul>
+
+        <button class="more-info-btn" onclick="toggleMoreInfo(this)">See Animation Examples</button>
+        <div class="more-info">
+            <p>Animations can highlight the node being inserted/deleted and show arrows moving to maintain the prev/next relationships.</p>
+            <p>Head and Tail nodes are visually highlighted to track list ends.</p>
+        </div>
+    </div>
+</section>
+
+
+    
+
+    <!-- Applications -->
+    <section id="applications" class="tab-content">
+    <div class="card">
+        <h2>Applications of Doubly Linked Lists</h2>
+        <ul >
+            <li>Implementation of <strong>Deques (Double Ended Queues)</strong> for efficient add/remove from both ends.</li>
+            <li><strong>Undo/Redo Functionality:</strong> In text editors, previous and next states can be linked as DLL nodes.</li>
+            <li><strong>Browser History:</strong> Forward and backward navigation can be implemented using DLL.</li>
+            <li><strong>Music Playlists:</strong> Moving to next/previous songs efficiently.</li>
+            <li><strong>Graph Representations:</strong> Adjacency lists for bidirectional graphs.</li>
+            <li><strong>Memory Management:</strong> Free memory blocks can be managed using DLL in OS memory allocators.</li>
+            <li><strong>Video Games:</strong> Entities in a scene can be maintained in DLL for fast insertion/deletion.</li>
+            <li><strong>Cache Implementations:</strong> LRU (Least Recently Used) cache often uses DLL with a hashmap for O(1) access.</li>
+        </ul>
+
+        <p>Key Benefits in Applications:</p>
+        <ul>
+            <li>Efficient insertion/deletion at both ends.</li>
+            <li>Bidirectional traversal allows flexible data manipulation.</li>
+            <li>Memory-efficient for dynamic data structures.</li>
+        </ul>
+
+        <button class="more-info-btn" onclick="toggleMoreInfo(this)">Real-life Example Details</button>
+        <div class="more-info">
+            <p>For example, in a text editor:</p>
+            <pre>
+Node1 (State1) <-> Node2 (State2) <-> Node3 (State3)
+Undo: Move backward
+Redo: Move forward
+            </pre>
+            <p>This shows how DLL allows moving between previous and next states efficiently.</p>
+        </div>
+    </div>
+</section>
+
+
+    <!-- Visualizer -->
+    <section id="visualizer" class="tab-content">
+        <div id="controls">
+            <input type="number" id="valueInput" placeholder="Enter value">
+            <input type="number" id="positionInput" placeholder="Position (middle ops)">
+        </div>
+        <div id="controls">
+            <button onclick="dll.addFront()">Add Front</button>
+            <button onclick="dll.addEnd()">Add End</button>
+            <button onclick="dll.addMiddle()">Add Middle</button>
+            <button onclick="dll.popFront()">Pop Front</button>
+            <button onclick="dll.popEnd()">Pop End</button>
+            <button onclick="dll.popMiddle()">Pop Middle</button>
+        </div>
+        <div id="dll-container"></div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>

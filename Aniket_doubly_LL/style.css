@@ -1,0 +1,189 @@
+/* General Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    background: linear-gradient(135deg, #1e1e2f, #2e2e4f);
+    color: #fff;
+}
+
+header {
+    text-align: center;
+    padding: 30px 20px;
+    background: #3b3b5f;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+}
+
+header h1 {
+    margin-bottom: 10px;
+    font-size: 2em;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 15px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+    margin-top: 50px;
+    max-width: 1500px;  
+    width: 95%;
+    max-width: 1600px;
+    padding: 30px 40px;
+}
+
+
+.card ul {
+    list-style-type: disc;
+    padding-left: 20px;
+}
+
+.card img.diagram {
+    width: 100%;
+    max-width: 400px;
+    margin-top: 10px;
+    border-radius: 10px;
+}
+
+/* Tabs Navigation */
+nav#tabs {
+    display: flex;
+    justify-content: center;
+    margin: 40px 0;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+nav#tabs .tab-btn {
+    background: #4CAF50;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+    font-size: 16px;
+}
+
+nav#tabs .tab-btn.active,
+nav#tabs .tab-btn:hover {
+    background: #45a049;
+}
+
+/* Tab Content */
+.tab-content {
+    display: none;
+    max-width: 900px;
+    margin: 0 auto 30px auto;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* More Info Cards */
+.more-info {
+    display: none;
+    margin-top: 15px;
+    background: rgba(0,0,0,0.2);
+    padding: 15px;
+    border-radius: 10px;
+    animation: fadeIn 0.5s ease forwards;
+}
+
+.more-info-btn {
+    margin-top: 10px;
+    padding: 8px 12px;
+    cursor: pointer;
+    background: #FF5722;
+    color: white;
+    border: none;
+    border-radius: 8px;
+}
+
+.more-info-btn:hover {
+    background: #e64a19;
+}
+
+/* DLL Visualizer */
+#controls {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+#controls input {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+#controls button {
+    padding: 10px 15px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: none;
+    background: #C43A2B;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#controls button:hover {
+    background: #382929;
+}
+
+#dll-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    min-height: 120px;
+    position: relative;
+}
+
+.node {
+    width: 60px;
+    height: 60px;
+    background: rgba(255,255,255,0.1);
+    border: 2px solid #fff;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    transition: transform 0.5s, background-color 0.5s;
+}
+
+.node.head { border-color: #4CAF50; }
+.node.tail { border-color: #FF5722; }
+.node.new-node { background-color: #ffeb3b; transform: scale(1.3); }
+.node.delete-node { background-color: #f44336; transform: scale(0.8); opacity: 0; }
+
+.arrow {
+    font-size: 24px;
+    font-weight: bold;
+    color: #fff;
+}
+
+section{
+    margin-top: 50%;
+}
+
+li{
+    font-size: 18px;
+    padding : 06px;
+}
+
+p{
+    font-size: 18px;
+}
+
+@keyframes fadeIn {
+    from {opacity: 0; transform: translateY(-10px);}
+    to {opacity:1; transform: translateY(0);}
+}

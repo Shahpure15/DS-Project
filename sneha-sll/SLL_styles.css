@@ -1,0 +1,117 @@
+/* sll_styles.css */
+.sll-container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    border-radius: 8px;
+}
+
+.sll-console {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+}
+
+.operation-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+    align-items: center;
+}
+
+.sll-input {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    flex-grow: 1;
+}
+
+button {
+    padding: 8px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.visualization-area {
+    min-height: 100px;
+    border: 2px dashed #ccc;
+    padding: 20px;
+    display: flex; /* Key for horizontal layout */
+    align-items: center;
+    overflow-x: auto; /* Allows horizontal scrolling for long lists */
+    background-color: #fff;
+}
+
+.empty-list-message {
+    color: #888;
+}
+
+/* --- Node and Arrow Styling --- */
+
+.sll-node {
+    display: flex;
+    border: 2px solid #333;
+    border-radius: 6px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    margin: 0 5px; /* Spacing between nodes and arrows */
+    transition: all 0.5s ease;
+    background-color: #fff;
+    flex-shrink: 0; /* Prevents nodes from shrinking */
+}
+
+.sll-data {
+    padding: 10px 15px;
+    border-right: 1px solid #333;
+    font-weight: bold;
+}
+
+.sll-next-pointer {
+    padding: 10px;
+    background-color: #eee;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #333;
+}
+
+.sll-arrow {
+    font-size: 2em;
+    color: #333;
+    margin: 0 10px;
+    align-self: center; /* Vertically center the arrow */
+    flex-shrink: 0;
+}
+
+/* --- Special States and Animations --- */
+
+/* Highlight for newly inserted node */
+.highlight-insert {
+    background-color: #aaffaa !important; /* Green */
+    animation: flash-insert 0.5s 2;
+}
+
+/* Highlight for deleted node */
+.highlight-delete {
+    background-color: #ffaaaa !important; /* Red */
+    border-color: #c00000 !important;
+}
+
+/* Highlight for search/traversal */
+.highlight-search {
+    border-color: #ffa500 !important; /* Orange */
+    box-shadow: 0 0 10px orange;
+}
+
+@keyframes flash-insert {
+    from { opacity: 0.5; }
+    to { opacity: 1; }
+}

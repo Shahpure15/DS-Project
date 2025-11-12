@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Singly Linked List Final Test</title>
+    <link rel="stylesheet" href="SLL_styles.css">
+</head>
+<body>
+    <h1>Singly Linked List Module - Final Check</h1>
+
+    <div class="sll-container">
+        <h2>Singly Linked List Visualization 🔗</h2>
+        <p>A Singly Linked List is a linear data structure composed of nodes, where the linear order is determined by pointers rather than by physical placement in memory (like an Array).<p>Node (The Building Block): Each item in the list is a node containing two parts:
+
+<p>1) Data: The actual value or information being stored.</p>
+2) Next Pointer (Link): An address that directs you to the memory location of the very next node in the sequence. 
+<p>OPERATIONS <br>
+    │<br>
+    ├─► 1. INSERTION (Adding a Node)<br>
+    │     │<br>
+    │     ├─► Insert at Head (O(1))<br>
+    │     ├─► Insert at Index (O(n))<br>
+    │     └─► Insert at Tail (O(n))<br>
+    │<br>
+    ├─► 2. DELETION (Removing a Node)<br>
+    │     │<br>
+    │     ├─► Delete Head (O(1))<br>
+    │     ├─► Delete at Index (O(n))<br>
+    │     └─► Delete Tail (O(n))<br>
+    │<br>
+    └─► 3. TRAVERSAL/SEARCH (Visiting Nodes)<br>
+          │<br>
+          └─► Search (O(n))</p> List size: <span id="list-size">0</span></p>
+
+        <div class="sll-console">
+            <h3>Insertion Operations</h3>
+            <div class="operation-group">
+                <input type="text" id="insert-head-value" placeholder="Value to Insert" class="sll-input">
+                <button onclick="SLL_VISUALIZER.insertAtHead(document.getElementById('insert-head-value').value)">
+                    Insert at Head
+                </button>
+            </div>
+            <div class="operation-group">
+                <input type="text" id="insert-tail-value" placeholder="Value to Insert" class="sll-input">
+                <button onclick="SLL_VISUALIZER.insertAtTail(document.getElementById('insert-tail-value').value)">
+                    Insert at Tail
+                </button>
+            </div>
+            <div class="operation-group">
+                <input type="text" id="insert-index-value" placeholder="Value" class="sll-input" style="width: 30%;">
+                <input type="text" id="insert-index-index" placeholder="Index (0 to N)" class="sll-input" style="width: 30%;">
+                <button onclick="SLL_VISUALIZER.insertAtIndex(document.getElementById('insert-index-value').value, document.getElementById('insert-index-index').value)">
+                    Insert at Index
+                </button>
+            </div>
+
+            <hr>
+
+            <h3>Deletion & Traversal Operations</h3>
+
+            <div class="operation-group">
+                <button onclick="SLL_VISUALIZER.deleteHead()">Delete Head</button>
+                <button onclick="SLL_VISUALIZER.deleteTail()">Delete Tail</button>
+                <input type="text" id="delete-index" placeholder="Index (0 to N-1)" class="sll-input" style="width: 30%;">
+                <button onclick="SLL_VISUALIZER.deleteAtIndex(document.getElementById('delete-index').value)">Delete at Index</button>
+            </div>
+            
+            <div class="operation-group">
+                <input type="text" id="search-value" placeholder="Value to Search" class="sll-input" style="width: 50%;">
+                <button onclick="SLL_VISUALIZER.search(document.getElementById('search-value').value)">Search (Traverse)</button>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="sll-dashboard">
+            <h3>Current List State</h3>
+            <div id="sll-visualization-area" class="visualization-area">
+                <div class="empty-list-message">List is currently empty.</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="SLL_script.js" defer></script>
+</body>
+</html>

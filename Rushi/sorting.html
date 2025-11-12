@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sorting Visualizer</title>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Poppins', sans-serif;
+        background: radial-gradient(circle at top, #141E30, #243B55);
+        color: #fff;
+        display: flex;
+        flex-direction: row;
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    .console {
+        width: 25%;
+        background: rgba(0,0,0,0.6);
+        backdrop-filter: blur(8px);
+        padding: 25px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        border-right: 2px solid rgba(255,255,255,0.1);
+    }
+
+    .console h2 {
+        text-align: center;
+        color: #00ffff;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-shadow: 0 0 8px #00ffff;
+    }
+
+    label {
+    margin-top: 15px;
+    font-size: 1rem;
+    color: #e0ffff;
+    text-shadow: 0 0 6px #00ffff50;
+}
+
+
+    input, select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1.5px solid #00ffff80;   /* visible border */
+    border-radius: 8px;
+    outline: none;
+    background: rgba(0, 0, 0, 0.4);  /* darker, solid background */
+    color: #ffffff;
+    font-size: 1rem;
+    box-shadow: 0 0 8px #00ffff40 inset; /* inner glow */
+    transition: 0.3s;
+}
+input:focus, select:focus {
+    border-color: #00ffff;
+    box-shadow: 0 0 15px #00ffff80;
+}
+
+
+    input::placeholder {
+        color: rgba(255,255,255,0.6);
+    }
+
+    select {
+        cursor: pointer;
+    }
+
+    button {
+    margin-top: 15px;
+    padding: 10px;
+    border: 2px solid #00ffffa0;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    background: linear-gradient(90deg, #00ffff, #007bff);
+    color: #000;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 0 15px #00ffff80;
+    opacity: 1; /* fully visible */
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 25px #00ffffb0;
+    filter: brightness(1.2);
+}
+
+
+    .visual {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;  /* ⬅️ centers the bars vertically */
+    gap: 12px;
+    padding: 40px;
+    overflow-x: auto;
+    background: linear-gradient(to bottom right, #0f2027, #203a43, #2c5364);
+}
+
+.bar {
+    width: 30px; /* wider bars */
+    border-radius: 10px;
+    transition: all 0.25s ease;
+    background: linear-gradient(to top, #00ffff, #007bff);
+    box-shadow: 0 0 20px #00ffff70;
+    height: 200px; /* base size, overridden dynamically by JS */
+}
+
+
+    .bar.highlight {
+        background: linear-gradient(to top, #ff4b1f, #ff9068);
+        box-shadow: 0 0 20px #ff4b1f80;
+    }
+
+    .footer-note {
+        text-align: center;
+        font-size: 0.85rem;
+        opacity: 0.7;
+        margin-top: 20px;
+    }
+
+    /* Scrollbar customization */
+    ::-webkit-scrollbar {
+        height: 8px;
+    }
+    ::-webkit-scrollbar-thumb {
+        background: #00ffff70;
+        border-radius: 10px;
+    }
+</style>
+</head>
+<body>
+
+<div class="console">
+    <div>
+        <h2>Sorting Visualizer</h2>
+        <label>Enter Array Elements (comma-separated):</label>
+        <input type="text" id="arrayInput" placeholder="e.g., 50,30,70,20,10">
+
+        <label>Select Algorithm:</label>
+        <select id="algoSelect">
+            <option value="bubble">Bubble Sort</option>
+            <option value="selection">Selection Sort</option>
+            <option value="insertion">Insertion Sort</option>
+            <option value="quick">Quick Sort</option>
+            <option value="merge">Merge Sort</option>
+        </select>
+
+        <label>Animation Speed:</label>
+        <select id="speedSelect">
+            <option value="300">Slow</option>
+            <option value="150" selected>Medium</option>
+            <option value="50">Fast</option>
+        </select>
+
+        <button onclick="generateRandom()">🎲 Generate Random Array</button>
+        <button onclick="startSort()">🚀 Start Sorting</button>
+        <button onclick="resetArray()">🔁 Reset</button>
+    </div>
+
+    <p class="footer-note">
+        Visualize how sorting algorithms work — with glowing bars and smooth animations.
+    </p>
+</div>
+
+<div class="visual" id="arrayContainer"></div>
+
+<script>
+    let arr = [];
+    let speed = 150;
+
+    function renderArray(highlight = []) {
+        const container = document.getElementById("arrayContainer");
+        container.innerHTML = "";
+        arr.forEach((val, idx) => {
+            const bar = document.createElement("div");
+            bar.className = "bar";
+            bar.style.height = val * 6 + "px"; // previously val * 3
+
+            if (highlight.includes(idx)) bar.classList.add("highlight");
+            container.appendChild(bar);
+        });
+    }
+
+    function sleep(ms) {
+        return new Promise(res => setTimeout(res, ms));
+    }
+
+    async function bubbleSort() {
+        for (let i = 0; i < arr.length - 1; i++) {
+            for (let j = 0; j < arr.length - i - 1; j++) {
+                renderArray([j, j + 1]);
+                await sleep(speed);
+                if (arr[j] > arr[j + 1]) {
+                    [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
+                }
+            }
+        }
+        renderArray();
+    }
+
+    async function selectionSort() {
+        for (let i = 0; i < arr.length; i++) {
+            let min = i;
+            for (let j = i + 1; j < arr.length; j++) {
+                renderArray([min, j]);
+                await sleep(speed);
+                if (arr[j] < arr[min]) min = j;
+            }
+            [arr[i], arr[min]] = [arr[min], arr[i]];
+        }
+        renderArray();
+    }
+
+    async function insertionSort() {
+        for (let i = 1; i < arr.length; i++) {
+            let key = arr[i];
+            let j = i - 1;
+            while (j >= 0 && arr[j] > key) {
+                renderArray([j, j + 1]);
+                await sleep(speed);
+                arr[j + 1] = arr[j];
+                j--;
+            }
+            arr[j + 1] = key;
+        }
+        renderArray();
+    }
+
+    async function quickSort(low = 0, high = arr.length - 1) {
+        if (low < high) {
+            const pi = await partition(low, high);
+            await quickSort(low, pi - 1);
+            await quickSort(pi + 1, high);
+        }
+        renderArray();
+    }
+
+    async function partition(low, high) {
+        let pivot = arr[high];
+        let i = low - 1;
+        for (let j = low; j < high; j++) {
+            renderArray([j, high]);
+            await sleep(speed);
+            if (arr[j] < pivot) {
+                i++;
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+        }
+        [arr[i + 1], arr[high]] = [arr[high], arr[i + 1]];
+        return i + 1;
+    }
+
+    async function mergeSort(left = 0, right = arr.length - 1) {
+        if (left >= right) return;
+        const mid = Math.floor((left + right) / 2);
+        await mergeSort(left, mid);
+        await mergeSort(mid + 1, right);
+        await merge(left, mid, right);
+        renderArray();
+    }
+
+    async function merge(left, mid, right) {
+        const leftArr = arr.slice(left, mid + 1);
+        const rightArr = arr.slice(mid + 1, right + 1);
+        let i = 0, j = 0, k = left;
+        while (i < leftArr.length && j < rightArr.length) {
+            renderArray([k]);
+            await sleep(speed);
+            if (leftArr[i] <= rightArr[j]) arr[k++] = leftArr[i++];
+            else arr[k++] = rightArr[j++];
+        }
+        while (i < leftArr.length) arr[k++] = leftArr[i++];
+        while (j < rightArr.length) arr[k++] = rightArr[j++];
+    }
+
+    async function startSort() {
+        const input = document.getElementById("arrayInput").value.trim();
+        const algo = document.getElementById("algoSelect").value;
+        speed = Number(document.getElementById("speedSelect").value);
+
+        if (!arr.length && !input) return alert("Please enter or generate an array!");
+
+        if (input) arr = input.split(",").map(Number);
+
+        renderArray();
+
+        if (algo === "bubble") await bubbleSort();
+        else if (algo === "selection") await selectionSort();
+        else if (algo === "insertion") await insertionSort();
+        else if (algo === "quick") await quickSort();
+        else if (algo === "merge") await mergeSort();
+
+        renderArray();
+    }
+
+    function generateRandom() {
+        arr = Array.from({length: 20}, () => Math.floor(Math.random() * 50) + 10);
+        document.getElementById("arrayInput").value = arr.join(",");
+        renderArray();
+    }
+
+    function resetArray() {
+        arr = [];
+        document.getElementById("arrayInput").value = "";
+        renderArray();
+    }
+
+    renderArray();
+</script>
+
+</body>
+</html>
